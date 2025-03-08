@@ -60,4 +60,5 @@ return [
     |
     */
     'webhook_secret' => env('TRELLO_WEBHOOK_SECRET'),
+    
 ];

@@ -14,6 +14,7 @@ class TrelloException extends Exception
         $this->statusCode = $statusCode;
     }
 
+    
     public function getStatusCode()
     {
         return $this->statusCode;

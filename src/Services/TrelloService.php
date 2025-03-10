@@ -52,6 +52,48 @@ class TrelloService
     }
 
     /**
+     * Create a new list on a board
+     * 
+     * @param string $boardId
+     * @param string $name
+     * @param array $options
+     * @return array
+     */
+    public function createList(string $boardId, string $name, array $options = [])
+    {
+        $data = array_merge([
+            'idBoard' => $boardId,
+            'name' => $name,
+        ], $options);
+
+        return $this->request('POST', '/lists', $data);
+    }
+
+    /**
+     * Update a list
+     * 
+     * @param string $listId
+     * @param array $data
+     * @return array
+     */
+    public function updateList(string $listId, array $data)
+    {
+        return $this->request('PUT', "/lists/{$listId}", $data);
+    }
+
+    /**
+     * Archive or unarchive a list
+     * 
+     * @param string $listId
+     * @param bool $archived
+     * @return array
+     */
+    public function archiveList(string $listId, bool $archived = true)
+    {
+        return $this->updateList($listId, ['closed' => $archived]);
+    }
+
+    /**
      * Get cards for a list
      *
      * @param string $listId
@@ -133,6 +175,77 @@ class TrelloService
     }
 
     /**
+     * Remove a label from a card
+     *
+     * @param string $cardId
+     * @param string $labelId
+     * @return array
+     */
+    public function removeLabel(string $cardId, string $labelId)
+    {
+        return $this->request('DELETE', "/cards/{$cardId}/idLabels/{$labelId}");
+    }
+
+    /**
+     * Get all board members
+     *
+     * @param string $boardId
+     * @return array
+     */
+    public function getBoardMembers(string $boardId)
+    {
+        return $this->request('GET', "/boards/{$boardId}/members");
+    }
+
+    /**
+     * Get all organization members
+     *
+     * @param string $orgId
+     * @return array
+     */
+    public function getOrganizationMembers(string $orgId)
+    {
+        return $this->request('GET', "/organizations/{$orgId}/members");
+    }
+
+    /**
+     * Assign a member to a card
+     *
+     * @param string $cardId
+     * @param string $memberId
+     * @return array
+     */
+    public function assignMemberToCard(string $cardId, string $memberId)
+    {
+        return $this->request('POST', "/cards/{$cardId}/idMembers", [
+            'value' => $memberId
+        ]);
+    }
+
+    /**
+     * Remove a member from a card
+     *
+     * @param string $cardId
+     * @param string $memberId
+     * @return array
+     */
+    public function removeMemberFromCard(string $cardId, string $memberId)
+    {
+        return $this->request('DELETE', "/cards/{$cardId}/idMembers/{$memberId}");
+    }
+
+    /**
+     * Get members assigned to a card
+     *
+     * @param string $cardId
+     * @return array
+     */
+    public function getCardMembers(string $cardId)
+    {
+        return $this->request('GET', "/cards/{$cardId}/members");
+    }
+
+    /**
      * Create a new webhook
      *
      * @param string $callbackUrl
@@ -158,6 +271,56 @@ class TrelloService
     public function deleteWebhook(string $webhookId)
     {
         return $this->request('DELETE', "/webhooks/{$webhookId}");
+    }
+
+    /**
+     * Get all webhooks
+     *
+     * @return array
+     */
+    public function getWebhooks()
+    {
+        return $this->request('GET', "/tokens/{$this->token}/webhooks");
+    }
+
+    /**
+     * Add a due date to a card
+     *
+     * @param string $cardId
+     * @param string $dueDate Format: 2023-12-31T12:00:00Z
+     * @return array
+     */
+    public function addDueDate(string $cardId, string $dueDate)
+    {
+        return $this->updateCard($cardId, ['due' => $dueDate]);
+    }
+
+    /**
+     * Add a checklist to a card
+     *
+     * @param string $cardId
+     * @param string $name
+     * @return array
+     */
+    public function addChecklist(string $cardId, string $name)
+    {
+        return $this->request('POST', "/cards/{$cardId}/checklists", [
+            'name' => $name
+        ]);
+    }
+
+    /**
+     * Add a checklist item
+     *
+     * @param string $checklistId
+     * @param string $name
+     * @return array
+     */
+    public function addChecklistItem(string $checklistId, string $name)
+    {
+        return $this->request('POST', "/checklists/{$checklistId}/checkItems", [
+            'name' => $name
+        ]);
     }
 
     /**

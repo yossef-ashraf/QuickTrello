@@ -249,3 +249,6 @@ For added security, you can set a webhook secret in your config and the package 
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+Best regards,  
+[Yossef Ashraf](https://github.com/yossef-ashraf)

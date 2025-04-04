@@ -1,0 +1,569 @@
+{
+    "info": {
+      "_postman_id": "a1b2c3d4-e5f6-7890-1234-5678abcdef",
+      "name": "QuickTrello API",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "description": "Postman collection for QuickTrello API endpoints"
+    },
+    "item": [
+      {
+        "name": "Boards",
+        "item": [
+          {
+            "name": "Get All Boards",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/api/trello/boards",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "boards"]
+              },
+              "description": "Get all boards for the authenticated user"
+            },
+            "response": []
+          },
+          {
+            "name": "Get Specific Board",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/api/trello/boards/:boardId",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "boards", ":boardId"],
+                "variable": [
+                  {
+                    "key": "boardId",
+                    "value": "YOUR_BOARD_ID"
+                  }
+                ]
+              },
+              "description": "Get a specific board by ID"
+            },
+            "response": []
+          },
+          {
+            "name": "Get Board Members",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/api/trello/boards/:boardId/members",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "boards", ":boardId", "members"],
+                "variable": [
+                  {
+                    "key": "boardId",
+                    "value": "YOUR_BOARD_ID"
+                  }
+                ]
+              },
+              "description": "Get members of a specific board"
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Organizations",
+        "item": [
+          {
+            "name": "Get Organization Members",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/api/trello/organizations/:orgId/members",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "organizations", ":orgId", "members"],
+                "variable": [
+                  {
+                    "key": "orgId",
+                    "value": "YOUR_ORG_ID"
+                  }
+                ]
+              },
+              "description": "Get members of an organization"
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Lists",
+        "item": [
+          {
+            "name": "Get Board Lists",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/api/trello/boards/:boardId/lists",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "boards", ":boardId", "lists"],
+                "variable": [
+                  {
+                    "key": "boardId",
+                    "value": "YOUR_BOARD_ID"
+                  }
+                ]
+              },
+              "description": "Get all lists for a board"
+            },
+            "response": []
+          },
+          {
+            "name": "Create List",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"board_id\": \"YOUR_BOARD_ID\",\n    \"name\": \"New List Name\",\n    \"options\": {}\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/api/trello/lists",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "lists"]
+              },
+              "description": "Create a new list on a board"
+            },
+            "response": []
+          },
+          {
+            "name": "Update List",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"list_id\": \"YOUR_LIST_ID\",\n    \"data\": {\n        \"name\": \"Updated List Name\"\n    }\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/api/trello/lists",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "lists"]
+              },
+              "description": "Update a list"
+            },
+            "response": []
+          },
+          {
+            "name": "Archive/Unarchive List",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"list_id\": \"YOUR_LIST_ID\",\n    \"archived\": true\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/api/trello/lists/archive",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "lists", "archive"]
+              },
+              "description": "Archive or unarchive a list"
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Cards",
+        "item": [
+          {
+            "name": "Get List Cards",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/api/trello/lists/:listId/cards",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "lists", ":listId", "cards"],
+                "variable": [
+                  {
+                    "key": "listId",
+                    "value": "YOUR_LIST_ID"
+                  }
+                ]
+              },
+              "description": "Get all cards in a list"
+            },
+            "response": []
+          },
+          {
+            "name": "Create Card",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"list_id\": \"YOUR_LIST_ID\",\n    \"title\": \"New Card Title\",\n    \"desc\": \"Card description\",\n    \"due\": \"2023-12-31\",\n    \"position\": \"top\",\n    \"labels\": [\"LABEL_ID_1\", \"LABEL_ID_2\"],\n    \"members\": [\"MEMBER_ID_1\", \"MEMBER_ID_2\"]\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/api/trello/cards",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "cards"]
+              },
+              "description": "Create a new card"
+            },
+            "response": []
+          },
+          {
+            "name": "Update Card",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"card_id\": \"YOUR_CARD_ID\",\n    \"data\": {\n        \"name\": \"Updated Card Name\",\n        \"desc\": \"Updated description\",\n        \"due\": \"2023-12-31\"\n    }\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/api/trello/cards",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "cards"]
+              },
+              "description": "Update a card"
+            },
+            "response": []
+          },
+          {
+            "name": "Move Card",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"card_id\": \"YOUR_CARD_ID\",\n    \"list_id\": \"NEW_LIST_ID\"\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/api/trello/cards/move",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "cards", "move"]
+              },
+              "description": "Move a card to a different list"
+            },
+            "response": []
+          },
+          {
+            "name": "Add Comment",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"card_id\": \"YOUR_CARD_ID\",\n    \"comment\": \"This is a comment\"\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/api/trello/cards/comment",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "cards", "comment"]
+              },
+              "description": "Add a comment to a card"
+            },
+            "response": []
+          },
+          {
+            "name": "Add Due Date",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"card_id\": \"YOUR_CARD_ID\",\n    \"due_date\": \"2023-12-31T23:59:59Z\"\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/api/trello/cards/due-date",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "cards", "due-date"]
+              },
+              "description": "Add a due date to a card"
+            },
+            "response": []
+          },
+          {
+            "name": "Get Card Members",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/api/trello/cards/:cardId/members",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "cards", ":cardId", "members"],
+                "variable": [
+                  {
+                    "key": "cardId",
+                    "value": "YOUR_CARD_ID"
+                  }
+                ]
+              },
+              "description": "Get members assigned to a card"
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Labels",
+        "item": [
+          {
+            "name": "Add Label to Card",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"card_id\": \"YOUR_CARD_ID\",\n    \"label_id\": \"LABEL_ID\"\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/api/trello/cards/label",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "cards", "label"]
+              },
+              "description": "Add a label to a card"
+            },
+            "response": []
+          },
+          {
+            "name": "Remove Label from Card",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"card_id\": \"YOUR_CARD_ID\",\n    \"label_id\": \"LABEL_ID\"\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/api/trello/cards/label",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "cards", "label"]
+              },
+              "description": "Remove a label from a card"
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Members",
+        "item": [
+          {
+            "name": "Assign Member to Card",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"card_id\": \"YOUR_CARD_ID\",\n    \"member_id\": \"MEMBER_ID\"\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/api/trello/cards/member",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "cards", "member"]
+              },
+              "description": "Assign a member to a card"
+            },
+            "response": []
+          },
+          {
+            "name": "Remove Member from Card",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"card_id\": \"YOUR_CARD_ID\",\n    \"member_id\": \"MEMBER_ID\"\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/api/trello/cards/member",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "cards", "member"]
+              },
+              "description": "Remove a member from a card"
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Checklists",
+        "item": [
+          {
+            "name": "Add Checklist to Card",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"card_id\": \"YOUR_CARD_ID\",\n    \"name\": \"Checklist Name\"\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/api/trello/cards/checklist",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "cards", "checklist"]
+              },
+              "description": "Add a checklist to a card"
+            },
+            "response": []
+          },
+          {
+            "name": "Add Checklist Item",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"checklist_id\": \"YOUR_CHECKLIST_ID\",\n    \"name\": \"Checklist Item Name\"\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/api/trello/checklists/item",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "checklists", "item"]
+              },
+              "description": "Add an item to a checklist"
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Webhooks",
+        "item": [
+          {
+            "name": "Get All Webhooks",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/api/trello/webhooks",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "webhooks"]
+              },
+              "description": "Get all webhooks"
+            },
+            "response": []
+          },
+          {
+            "name": "Create Webhook",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"callback_url\": \"https://yourdomain.com/webhook\",\n    \"model_id\": \"YOUR_BOARD_OR_CARD_ID\",\n    \"description\": \"Webhook description\"\n}"
+              },
+              "url": {
+                "raw": "{{base_url}}/api/trello/webhooks",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "webhooks"]
+              },
+              "description": "Create a new webhook"
+            },
+            "response": []
+          },
+          {
+            "name": "Delete Webhook",
+            "request": {
+              "method": "DELETE",
+              "header": [],
+              "url": {
+                "raw": "{{base_url}}/api/trello/webhooks/:webhookId",
+                "host": ["{{base_url}}"],
+                "path": ["api", "trello", "webhooks", ":webhookId"],
+                "variable": [
+                  {
+                    "key": "webhookId",
+                    "value": "YOUR_WEBHOOK_ID"
+                  }
+                ]
+              },
+              "description": "Delete a webhook"
+            },
+            "response": []
+          }
+        ]
+      }
+    ],
+    "variable": [
+      {
+        "key": "base_url",
+        "value": "http://your-app.test"
+      }
+    ]
+  }
